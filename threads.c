@@ -244,18 +244,19 @@ int pthread_create(pthread_t *thread, const pthread_attr_t  *attr, void *(*start
 
 int pthread_join(pthread_t thread, void **value_ptr)
 {
-  int curr = 0;
+ /* int curr = 0;
 
   while(mythreads[curr].id != thread && curr < MAX_THREADS) //finds current thread
     {
       curr++;
-    }
+    }*/
 
-  if(mythreads[curr].basic_state != EXITED) //if not exited
+  if(mythreads[thread].basic_state != EXITED) //if not exited
     {
       mythreads[count].saved_state = mythreads[count].basic_state; //saves old state
       mythreads[count].basic_state = BLOCKED; //blocks thread
-      int i;
+	mythreads[thread].join_id = count;
+      /*int i;
       for(i = 0; i < MAX_THREADS; i++)
 	{
 	  if(mythreads[curr].join_id == 0)
@@ -263,7 +264,7 @@ int pthread_join(pthread_t thread, void **value_ptr)
 	      mythreads[curr].join_id = count; //saves count to the join id of curr
 	      break;
 	    }
-	}
+	}*/
       schedule();
     }
 
