@@ -250,6 +250,7 @@ int pthread_join(pthread_t thread, void **value_ptr)
     {
       curr++;
     }*/
+value_ptr = &mythreads[thread].exit_state; //value ptr is the exit value of curr
 
   if(mythreads[thread].basic_state != EXITED) //if not exited
     {
@@ -267,8 +268,6 @@ int pthread_join(pthread_t thread, void **value_ptr)
 	}*/
       schedule();
     }
-
-  value_ptr = &mythreads[curr].exit_state; //value ptr is the exit value of curr
 
   return 0;
 }
