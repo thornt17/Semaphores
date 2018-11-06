@@ -232,7 +232,7 @@ int pthread_create(pthread_t *thread, const pthread_attr_t  *attr, void *(*start
       mythreads[threadcount].stack = malloc(MAX_BYTES);
 
       mythreads[threadcount].stack[MAX_BYTES/4 - 1] = (unsigned long int)arg;
-      mythreads[threadcount].stack[MAX_BYTES/4 - 2] = (unsigned long int)pthread_exit;
+      mythreads[threadcount].stack[MAX_BYTES/4 - 2] = (unsigned long int)pthread_exit_wrapper;
 
       mythreads[threadcount].stackpointer = ptr_mangle((int)(mythreads[threadcount].stack + MAX_BYTES/4 - 2));
       mythreads[threadcount].PCpointer = ptr_mangle((int) start_routine);
