@@ -213,7 +213,7 @@ int pthread_create(pthread_t *thread, const pthread_attr_t  *attr, void *(*start
 	  mythreads[0].stack = malloc(MAX_BYTES);
 
 	  mythreads[0].stack[MAX_BYTES/4 - 1] = (unsigned long int)arg;
-	  mythreads[0].stack[MAX_BYTES/4 - 2] = (unsigned long int)pthread_exit;
+	  mythreads[0].stack[MAX_BYTES/4 - 2] = (unsigned long int)pthread_exit_wrapper;
 	  mythreads[0].basic_state = RUNNING;
 	  setjmp(mythreads[0].jump_state);
 	  mythreads[0].jump_state[0].__jmpbuf[JB_SP] = mythreads[0].stackpointer;
